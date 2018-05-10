@@ -1,0 +1,7 @@
+# lib/tasks/test.sidekiq
+namespace :crono do
+  desc 'Greetings'
+  task :hello => :environment do
+    puts "hello"
+  end
+end
