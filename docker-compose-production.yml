@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile.production
-    command: dumb-init bundle exec puma -C config/puma.rb
+    command: dumb-init bin/bundle exec puma
     volumes:
       - /Users/piotr/Documents/projects/RoR_App/blog/app/assets:/app/public/assets
       - /Users/piotr/Documents/projects/RoR_App/blog/log:/app/log
@@ -21,7 +21,7 @@ services:
     volumes:
       - /Users/piotr/Documents/projects/RoR_App/blog/log:/app/log
     hostname: "netguru.application.production.crono"
-    command: dumb-init bundle exec crono
+    command: dumb-init bin/bundle exec crono
     labels:
       - "netguru.appname=threecomponentapp"
       - "netguru.stage=production"
@@ -32,7 +32,7 @@ services:
     volumes:
       - /Users/piotr/Documents/projects/RoR_App/blog/log:/app/log
     hostname: "netguru.application.production.sidekiq"
-    command: dumb-init bash -c "bundle exec sidekiq"
+    command: dumb-init bin/bundle exec sidekiq
     labels:
       - "netguru.appname=threecomponentapp"
       - "netguru.stage=production"
