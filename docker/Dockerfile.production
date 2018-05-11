@@ -1,0 +1,32 @@
+FROM quay.io/netguru/baseimage:0.10.2
+
+ENV RUBY_VERSION 2.5.1
+ENV RAILS_MAX_THREADS 4
+
+
+## Install Ruby
+RUN \
+  apt-get update -q && \
+  ruby-install --system --cleanup ruby $RUBY_VERSION && \
+  gem install bundler
+
+## Copy Gemfile & bundle
+ADD Gemfile* $APP_HOME/
+RUN bundle install --jobs=8 --retry=3 --without development test --deployment
+
+## Add rest of code
+ADD . $APP_HOME/
+ENV PUMA_WORKERS 1
+
+## Environment - Production
+ENV RAILS_ENV production
+
+#### Set proper timezone
+RUN \
+  ln -fs /usr/share/zoneinfo/Europe/Warsaw /etc/localtime && \
+  dpkg-reconfigure --frontend noninteractive tzdata
+
+## Clearing and removal of tmp directories
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN mkdir -p /app/tmp/pids
