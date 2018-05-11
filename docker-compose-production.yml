@@ -21,7 +21,7 @@ services:
     volumes:
       - /Users/piotr/Documents/projects/RoR_App/blog/log:/app/log
     hostname: "netguru.application.production.crono"
-    command: dumb-init bash -c "bundle exec crono"
+    command: dumb-init bundle exec crono
     labels:
       - "netguru.appname=threecomponentapp"
       - "netguru.stage=production"

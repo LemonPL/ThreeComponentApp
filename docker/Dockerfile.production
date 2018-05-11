@@ -1,8 +1,8 @@
 FROM quay.io/netguru/baseimage:0.10.2
 
+ENV RAILS_ENV production
 ENV RUBY_VERSION 2.5.1
 ENV RAILS_MAX_THREADS 4
-
 
 ## Install Ruby
 RUN \
@@ -16,10 +16,6 @@ RUN bundle install --jobs=8 --retry=3 --without development test --deployment
 
 ## Add rest of code
 ADD . $APP_HOME/
-ENV PUMA_WORKERS 1
-
-## Environment - Production
-ENV RAILS_ENV production
 
 #### Set proper timezone
 RUN \

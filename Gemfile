@@ -63,3 +63,4 @@ gem 'sidekiq'
 gem 'crono'
 # Use Postgres as the database for Active Record
 gem 'pg'
+gem 'bindex'
