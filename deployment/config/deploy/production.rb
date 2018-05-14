@@ -7,7 +7,7 @@ set :branch, 'master'
 ## dockerfile
 set :dockerfile, -> { 'docker/Dockerfile.production' }
 
-## capose
+## capose built
 set :capose_commands, -> {
   [
     'build',

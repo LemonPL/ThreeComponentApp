@@ -6,11 +6,11 @@ services:
       dockerfile: docker/Dockerfile.production
     command: dumb-init bin/bundle exec puma
     volumes:
-      - /Users/piotr/Documents/projects/RoR_App/blog/app/assets:/app/public/assets
-      - /Users/piotr/Documents/projects/RoR_App/blog/log:/app/log
+      - /home/deploy/apps/threeComponentApp/shared/public/assets:/app/log:/app/public/assets
+      - /home/deploy/apps/threeComponentApp/shared/log:/app/log
     hostname: "netguru.application.production.web"
     labels:
-      - "netguru.appname=threecomponentapp"
+      - "netguru.appname=threeComponentApp"
       - "netguru.stage=production"
     expose:
       - "3000"
@@ -19,20 +19,20 @@ services:
       context: .
       dockerfile: docker/Dockerfile.production
     volumes:
-      - /Users/piotr/Documents/projects/RoR_App/blog/log:/app/log
+      - /home/deploy/apps/threeComponentApp/shared/log:/app/log
     hostname: "netguru.application.production.crono"
     command: dumb-init bin/bundle exec crono
     labels:
-      - "netguru.appname=threecomponentapp"
+      - "netguru.appname=threeComponentApp"
       - "netguru.stage=production"
   sidekiq:
     build:
       context: .
       dockerfile: docker/Dockerfile.production
     volumes:
-      - /Users/piotr/Documents/projects/RoR_App/blog/log:/app/log
+      - /home/deploy/apps/threeComponentApp/shared/log:/app/log
     hostname: "netguru.application.production.sidekiq"
     command: dumb-init bin/bundle exec sidekiq
     labels:
-      - "netguru.appname=threecomponentapp"
+      - "netguru.appname=threeComponentApp"
       - "netguru.stage=production"
