@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+
+## deployment automation tool
+gem 'capistrano'
+
+## work with docker-compose deployments
+gem 'capose'
